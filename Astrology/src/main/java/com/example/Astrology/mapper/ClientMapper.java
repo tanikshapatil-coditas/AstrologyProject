@@ -1,6 +1,7 @@
 package com.example.Astrology.mapper;
 
 import com.example.Astrology.dto.ClientDto;
+import com.example.Astrology.dto.ClientNameDto;
 import com.example.Astrology.entity.Client;
 
 public class ClientMapper {
@@ -32,8 +33,10 @@ public class ClientMapper {
         clientDto.setAge(client.getAge());
         clientDto.setUploadMedia(client.getUploadMedia());
         clientDto.setContact(client.getContact());
-
-
         return clientDto;
+    }
+
+    public static ClientNameDto toClientDto(Client client) {
+        return new ClientNameDto(client.getName());
     }
 }

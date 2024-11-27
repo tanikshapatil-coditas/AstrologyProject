@@ -22,8 +22,6 @@ public class ClientDto {
     private String name;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private Date dob;
-//    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "HH:mm:ss")
-//    private LocalTime time;
     private String address;
     private Integer age;
     private String contact;

@@ -29,10 +29,6 @@ public class Client {
     @Past(message = "Date of Birth must be in the past")
     private Date dob;
 
-//    @Column(name = "time", nullable = false)
-//    @NotNull(message = "Time is required")
-//    private LocalTime time;
-
     @Column(name = "address", nullable = false)
     @NotBlank(message = "Address is required")
     @Size(max = 255, message = "Address cannot exceed 255 characters")
