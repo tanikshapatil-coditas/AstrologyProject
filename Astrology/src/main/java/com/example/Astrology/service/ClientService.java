@@ -19,4 +19,5 @@ public interface ClientService {
 
     void deleteClient(Long id);
 
+//    public List<ClientNameDto> viewAllClients(int pageNo,String sort);
 }

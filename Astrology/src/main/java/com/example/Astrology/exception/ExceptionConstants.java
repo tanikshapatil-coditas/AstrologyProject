@@ -7,4 +7,5 @@ public class ExceptionConstants {
     public static final String USERNAME_REQUIRED = "Username should not be null or empty";
     public static final String CLIENT_NOT_FOUND = "Client not found!!";
     public static final String INVALID_USER_ID = "UserId does not exist";
+    public static final String CONSULTATION_NOT_FOUND = "Consultation not found!!";
 }

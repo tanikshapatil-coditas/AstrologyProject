@@ -55,7 +55,7 @@ public class ClientController {
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<ApiResponse<Void>> deleteClient(@PathVariable Long id) {
         clientService.deleteClient(id);
-        return ResponseUtil.success(null, "Client deleted successfully!!");
+        return ResponseUtil.delete(null, "Client deleted successfully!!");
     }
 }
 

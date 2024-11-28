@@ -69,6 +69,14 @@ public class GlobalExceptionHandler {
         error.setTimeStamp(System.currentTimeMillis());
         return new ResponseEntity<>(ex.getMessage(), HttpStatus.BAD_REQUEST);
     }
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public ResponseEntity<String> consultationNotFoundException(ConsultationNotFoundException ex) {
+        UserErrorResponse error = new UserErrorResponse();
+        error.setStatus(HttpStatus.NOT_FOUND.value());
+        error.setMessage(ex.getMessage());
+        error.setTimeStamp(System.currentTimeMillis());
+        return new ResponseEntity<>(ex.getMessage(), HttpStatus.NOT_FOUND);
+    }
 
     @ExceptionHandler
     public ResponseEntity<?> handleException(Exception ex) {
@@ -78,4 +86,5 @@ public class GlobalExceptionHandler {
         error.setTimeStamp(System.currentTimeMillis());
         return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
     }
+
 }

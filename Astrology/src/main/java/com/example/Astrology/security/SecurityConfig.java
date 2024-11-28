@@ -23,8 +23,8 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @AllArgsConstructor
 public class SecurityConfig {
 
-//    @Autowired
-//    private JwtFilter jwtFilter;
+    @Autowired
+    private JwtFilter jwtFilter;
 
     @Autowired
     private CustomUserDetailService userDetailsService;
@@ -42,21 +42,20 @@ public class SecurityConfig {
     SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http.csrf(c -> c.disable())
                 .authorizeHttpRequests(req -> {
-                            req.anyRequest().permitAll();
-                        })
-                        .build();
+//                            req.anyRequest().permitAll();
+//                        })
+//                        .build();
+//    }
+                    req.requestMatchers("/api/users/**").permitAll();
+                    req.requestMatchers("/api/products/**").permitAll();
+                    req.requestMatchers("/api/auth/**").permitAll();
+                    req.anyRequest().authenticated();
+                })
+                .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
+                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+                .build();
+
     }
-//                    req.requestMatchers("/api/users/**").permitAll();
-//                    req.requestMatchers("/api/products/**").permitAll();
-//                    req.requestMatchers("/api/auth/**").permitAll();
-//                    req.anyRequest().authenticated();
-//                })
-//
-//                .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
-//                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-//                .build();
-
-
     /**
      * Defines an authentication provider using DaoAuthenticationProvider with a custom user details service
      * and password encoder for authentication.

@@ -1,38 +1,41 @@
 package com.example.Astrology.mapper;
 
+import com.example.Astrology.dto.ConsultationCreateDto;
 import com.example.Astrology.dto.ConsultationDto;
 import com.example.Astrology.entity.Consultation;
 import com.example.Astrology.entity.Client;
 
 public class ConsultationMapper {
 
-    public static ConsultationDto MaptoDto(Consultation consultation) {
-        if (consultation == null) {
-            return null;
-        }
-        return new ConsultationDto(
-                consultation.getId(),
-                consultation.getConsultationDate(),
-                consultation.getCharges(),
-                consultation.getBalance(),
-                consultation.getNotes(),
-                consultation.getClient() != null ? consultation.getClient().getId() : null
-        );
-    }
-
-    public static Consultation MaptoEntity(ConsultationDto consultationDTO, Client client) {
-        if (consultationDTO == null) {
-            return null;
-        }
-        Consultation consultation = new Consultation(
-                consultationDTO.getId(),
-                consultationDTO.getConsultationDate(),
-                consultationDTO.getCharges(),
-                consultationDTO.getBalance(),
-                consultationDTO.getNotes(),
-                client
-        );
-        consultation.setClient(client);
+    public static Consultation toEntity(ConsultationDto consultationDto) {
+        Consultation consultation = new Consultation();
+        consultation.setConsultationDate(consultationDto.getConsultationDate());
+        consultation.setCharges(consultationDto.getCharges());
+        consultation.setBalance(consultationDto.getBalance());
+        consultation.setNotes(consultationDto.getNotes());
         return consultation;
     }
+
+    public static ConsultationDto toConsultationDto(Consultation consultation) {
+        ConsultationDto consultationDto = new ConsultationDto();
+        consultationDto.setId(consultation.getId());
+        consultationDto.setConsultationDate(consultation.getConsultationDate());
+        consultationDto.setCharges(consultation.getCharges());
+        consultationDto.setBalance(consultation.getBalance());
+        consultationDto.setNotes(consultation.getNotes());
+        return consultationDto;
+    }
+
+    public static ConsultationCreateDto consultationCreateDto(Consultation consultation) {
+        ConsultationCreateDto consultationCreateDto = new ConsultationCreateDto();
+        consultationCreateDto.setId(consultation.getId());
+        consultationCreateDto.setConsultationDate(consultation.getConsultationDate());
+        consultationCreateDto.setCharges(consultation.getCharges());
+        consultationCreateDto.setBalance(consultation.getBalance());
+        consultationCreateDto.setNotes(consultation.getNotes());
+        return consultationCreateDto;
+
+    }
+
+
 }

@@ -32,7 +32,7 @@ public class Consultation {
     private Double charges;
 
     @Column(name = "balance", nullable = false)
-    @DecimalMin(value = "0.0", inclusive = false, message = "Balance must be zero or positive")
+    @DecimalMin(value = "0.0", inclusive = true, message = "Balance must be zero or positive")
     private Double balance;
 
     @Column(name = "notes", length = 500)
@@ -42,4 +42,8 @@ public class Consultation {
     @ManyToOne
     @JoinColumn(name = "client_id", nullable = false)
     private Client client;
+
+    public Consultation() {
+
+    }
 }
