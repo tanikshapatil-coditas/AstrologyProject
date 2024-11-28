@@ -7,6 +7,9 @@ import com.example.Astrology.dto.ResponseUtil;
 import com.example.Astrology.service.ConsultationService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -42,5 +45,12 @@ public class ConsultationController {
     public ResponseEntity<ApiResponse<Void>> deleteConsultation(@PathVariable Long id) {
         consultationService.deleteConsultation(id);
         return ResponseUtil.delete(null, "Consultation deleted successfully!!");
+    }
+
+    @GetMapping("/upcoming")
+    public ResponseEntity<ApiResponse<Page<ConsultationDto>>> getUpcomingConsultations(@RequestParam int size) {
+        Pageable pageable = PageRequest.of(0, size);
+        Page<ConsultationDto> consultations = consultationService.getUpcomingConsultations(pageable);
+        return ResponseUtil.success(consultations, "Upcoming consultations retrieved successfully!!");
     }
 }

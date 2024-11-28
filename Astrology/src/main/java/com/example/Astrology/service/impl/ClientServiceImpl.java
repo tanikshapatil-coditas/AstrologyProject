@@ -13,6 +13,8 @@ import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -78,4 +80,15 @@ public class ClientServiceImpl implements ClientService {
 //        refreshrepo.delete(refreshToken);
         clientRepository.deleteById(id);
     }
+
+    @Override
+    public Page<ClientDto> getClients(String sortBy, Pageable pageable) {
+        if ("name".equalsIgnoreCase(sortBy)) {
+            Pageable sortedByName = PageRequest.of(pageable.getPageNumber(), pageable.getPageSize(), Sort.by("name"));
+            return clientRepository.findAll(sortedByName).map(ClientMapper::toDto);
+        } else {
+            return clientRepository.findAll(pageable).map(ClientMapper::toDto);
+        }
+    }
 }
+

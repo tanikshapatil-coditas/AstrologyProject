@@ -12,7 +12,8 @@ import java.util.Date;
 public class ConsultationCreateDto {
     private Long id;
     private Date consultationDate;
-    private Double charges;
+    private Double fee;
+    private Double amountPaid;
     private Double balance;
     private String notes;
 }

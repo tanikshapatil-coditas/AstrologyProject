@@ -9,6 +9,9 @@ import com.example.Astrology.service.ClientService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -56,6 +59,13 @@ public class ClientController {
     public ResponseEntity<ApiResponse<Void>> deleteClient(@PathVariable Long id) {
         clientService.deleteClient(id);
         return ResponseUtil.delete(null, "Client deleted successfully!!");
+    }
+
+    @GetMapping("/sortedClients")
+    public ResponseEntity<ApiResponse<Page<ClientDto>>> getClients(@RequestParam int page, @RequestParam int size, @RequestParam(required = false) String sortBy) {
+        Pageable pageable = PageRequest.of(page, size);
+        Page<ClientDto> clients = clientService.getClients(sortBy, pageable);
+        return ResponseUtil.success(clients, "Clients retrieved successfully!!");
     }
 }
 

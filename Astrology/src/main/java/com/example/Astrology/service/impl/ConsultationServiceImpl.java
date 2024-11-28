@@ -11,8 +11,13 @@ import com.example.Astrology.repository.ClientRepository;
 import com.example.Astrology.repository.ConsultationRepository;
 import com.example.Astrology.service.ConsultationService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -46,7 +51,8 @@ public class ConsultationServiceImpl implements ConsultationService {
     public ConsultationCreateDto updateConsultation(Long id, ConsultationDto consultationDto) {
         Consultation consultation = consultationRepository.findById(id).orElseThrow(ConsultationNotFoundException::new);
         consultation.setConsultationDate(consultationDto.getConsultationDate());
-        consultation.setCharges(consultationDto.getCharges());
+        consultation.setFee(consultationDto.getFee());
+        consultation.setAmountPaid(consultationDto.getAmountPaid());
         consultation.setBalance(consultationDto.getBalance());
         consultation.setNotes(consultationDto.getNotes());
         Consultation updatedConsultation = consultationRepository.save(consultation);
@@ -57,5 +63,12 @@ public class ConsultationServiceImpl implements ConsultationService {
     public void deleteConsultation(Long id) {
         Consultation consultation = consultationRepository.findById(id).orElseThrow(ConsultationNotFoundException::new);
         consultationRepository.delete(consultation);
+    }
+
+    @Override
+    public Page<ConsultationDto> getUpcomingConsultations(Pageable pageable) {
+        LocalDate today = LocalDate.now();
+        Date startDate = Date.from(today.atStartOfDay(ZoneId.systemDefault()).toInstant());
+        return consultationRepository.findByConsultationDateAfterOrderByConsultationDateAsc(startDate, pageable).map(ConsultationMapper::toConsultationDto);
     }
 }

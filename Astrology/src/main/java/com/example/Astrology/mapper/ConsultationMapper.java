@@ -10,7 +10,8 @@ public class ConsultationMapper {
     public static Consultation toEntity(ConsultationDto consultationDto) {
         Consultation consultation = new Consultation();
         consultation.setConsultationDate(consultationDto.getConsultationDate());
-        consultation.setCharges(consultationDto.getCharges());
+        consultation.setFee(consultationDto.getFee());
+        consultation.setAmountPaid(consultationDto.getAmountPaid());
         consultation.setBalance(consultationDto.getBalance());
         consultation.setNotes(consultationDto.getNotes());
         return consultation;
@@ -20,7 +21,8 @@ public class ConsultationMapper {
         ConsultationDto consultationDto = new ConsultationDto();
         consultationDto.setId(consultation.getId());
         consultationDto.setConsultationDate(consultation.getConsultationDate());
-        consultationDto.setCharges(consultation.getCharges());
+        consultationDto.setFee(consultation.getFee());
+        consultationDto.setAmountPaid(consultation.getAmountPaid());
         consultationDto.setBalance(consultation.getBalance());
         consultationDto.setNotes(consultation.getNotes());
         return consultationDto;
@@ -30,7 +32,8 @@ public class ConsultationMapper {
         ConsultationCreateDto consultationCreateDto = new ConsultationCreateDto();
         consultationCreateDto.setId(consultation.getId());
         consultationCreateDto.setConsultationDate(consultation.getConsultationDate());
-        consultationCreateDto.setCharges(consultation.getCharges());
+        consultationCreateDto.setFee(consultation.getFee());
+        consultationCreateDto.setAmountPaid(consultation.getAmountPaid());
         consultationCreateDto.setBalance(consultation.getBalance());
         consultationCreateDto.setNotes(consultation.getNotes());
         return consultationCreateDto;
