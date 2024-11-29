@@ -11,10 +11,7 @@ import lombok.*;
 @Getter
 @Setter
 @Table(name = "astrologers")
-public class Astrologer {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+public class Astrologer extends BaseEntity{
 
     @Column(name = "username", nullable = false, unique = true)
     @NotBlank(message = "Username is required")

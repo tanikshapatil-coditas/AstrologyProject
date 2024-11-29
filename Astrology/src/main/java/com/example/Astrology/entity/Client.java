@@ -6,8 +6,6 @@ import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
-import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.util.Date;
 import java.util.List;
 
@@ -15,10 +13,7 @@ import java.util.List;
 @AllArgsConstructor
 @Entity
 @Table(name = "clients")
-public class Client {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+public class Client extends BaseEntity {
 
     @Column(name = "name", nullable = false)
     @NotBlank(message = "Client name is required")

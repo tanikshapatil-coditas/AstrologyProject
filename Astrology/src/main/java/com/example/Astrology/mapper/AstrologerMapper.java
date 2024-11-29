@@ -16,14 +16,14 @@ public class AstrologerMapper {
         );
     }
 
-    public static Astrologer mapToEntity(AstrologerDto astrologerDTO) {
-        if (astrologerDTO == null) {
-            return null;
-        }
-        return new Astrologer(
-                astrologerDTO.getId(),
-                astrologerDTO.getUsername(),
-                astrologerDTO.getPassword()
-        );
-    }
+//    public static Astrologer mapToEntity(AstrologerDto astrologerDTO) {
+//        if (astrologerDTO == null) {
+//            return null;
+//        }
+//        return new Astrologer(
+//                astrologerDTO.getId(),
+//                astrologerDTO.getUsername(),
+//                astrologerDTO.getPassword()
+//        );
+//    }
 }

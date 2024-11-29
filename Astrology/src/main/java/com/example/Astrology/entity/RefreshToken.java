@@ -14,9 +14,9 @@ import java.time.Instant;
 @NoArgsConstructor
 @Builder
 @Table(name = "refresh_token")
-public class RefreshToken {
+public class RefreshToken extends BaseEntity{
 
-    @Id
+    @Column(name = "token",columnDefinition = "TEXT")
     private String token;
 
     @Column(name = "expiryDate", nullable = false)

@@ -16,10 +16,7 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "consultations")
-public class Consultation {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+public class Consultation extends BaseEntity{
 
     @Column(name = "consultation_date", nullable = false)
     @NotNull(message = "Consultation date is required")
