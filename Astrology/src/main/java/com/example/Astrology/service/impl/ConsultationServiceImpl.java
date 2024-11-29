@@ -69,6 +69,6 @@ public class ConsultationServiceImpl implements ConsultationService {
     public Page<ConsultationDto> getUpcomingConsultations(Pageable pageable) {
         LocalDate today = LocalDate.now();
         Date startDate = Date.from(today.atStartOfDay(ZoneId.systemDefault()).toInstant());
-        return consultationRepository.findByConsultationDateAfterOrderByConsultationDateAsc(startDate, pageable).map(ConsultationMapper::toConsultationDto);
+        return consultationRepository.findByConsultationDateAsc(startDate, pageable).map(ConsultationMapper::toConsultationDto);
     }
 }
