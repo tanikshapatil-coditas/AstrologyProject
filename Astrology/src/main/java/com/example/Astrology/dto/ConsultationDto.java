@@ -16,5 +16,6 @@ public class ConsultationDto {
     private Double amountPaid;
     private Double balance;
     private String notes;
+    private Date nextConsultationDate;
     private Long clientId;
 }

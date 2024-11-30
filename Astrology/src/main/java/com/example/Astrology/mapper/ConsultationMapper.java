@@ -9,11 +9,13 @@ public class ConsultationMapper {
 
     public static Consultation toEntity(ConsultationDto consultationDto) {
         Consultation consultation = new Consultation();
+
         consultation.setConsultationDate(consultationDto.getConsultationDate());
         consultation.setFee(consultationDto.getFee());
         consultation.setAmountPaid(consultationDto.getAmountPaid());
         consultation.setBalance(consultationDto.getBalance());
         consultation.setNotes(consultationDto.getNotes());
+        consultation.setNextConsultationDate(consultationDto.getNextConsultationDate());
         return consultation;
     }
 
@@ -25,6 +27,7 @@ public class ConsultationMapper {
         consultationDto.setAmountPaid(consultation.getAmountPaid());
         consultationDto.setBalance(consultation.getBalance());
         consultationDto.setNotes(consultation.getNotes());
+        consultationDto.setNextConsultationDate(consultation.getNextConsultationDate());
         return consultationDto;
     }
 
@@ -36,6 +39,7 @@ public class ConsultationMapper {
         consultationCreateDto.setAmountPaid(consultation.getAmountPaid());
         consultationCreateDto.setBalance(consultation.getBalance());
         consultationCreateDto.setNotes(consultation.getNotes());
+        consultationCreateDto.setNextConsultationDate(consultation.getNextConsultationDate());
         return consultationCreateDto;
 
     }

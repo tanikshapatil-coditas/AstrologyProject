@@ -16,4 +16,5 @@ public class ConsultationCreateDto {
     private Double amountPaid;
     private Double balance;
     private String notes;
+    private Date nextConsultationDate;
 }

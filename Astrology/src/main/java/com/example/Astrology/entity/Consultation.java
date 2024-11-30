@@ -23,9 +23,12 @@ public class Consultation {
 
     @Column(name = "consultation_date", nullable = false)
     @NotNull(message = "Consultation date is required")
-    @FutureOrPresent(message = "Consultation date must be in the present or future")
     private Date consultationDate;
 
+    @Column(name = "next_consultation_date", nullable = false)
+    @NotNull(message = "Next consultation date is required")
+    @FutureOrPresent(message = "Next consultation date must be in the present or in the future")
+    private Date nextConsultationDate;
 
     @Column(name = "fee", nullable = false)
     @NotNull(message = "Fee is required")
@@ -52,7 +55,13 @@ public class Consultation {
     @JoinColumn(name = "client_id", nullable = false)
     private Client client;
 
+
     @PrePersist
+    protected void onCreate(){
+        this.consultationDate = new Date();
+        this.balance = this.fee - this.amountPaid;
+    }
+
     @PreUpdate
     public void calculateBalance() {
         this.balance = this.fee - this.amountPaid;

@@ -54,6 +54,7 @@ public class ConsultationServiceImpl implements ConsultationService {
         consultation.setAmountPaid(consultationDto.getAmountPaid());
         consultation.setBalance(consultationDto.getBalance());
         consultation.setNotes(consultationDto.getNotes());
+        consultation.setNextConsultationDate(consultationDto.getNextConsultationDate());
         Consultation updatedConsultation = consultationRepository.save(consultation);
         return ConsultationMapper.consultationCreateDto(updatedConsultation);
     }

@@ -10,6 +10,7 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
@@ -24,6 +25,7 @@ import java.util.function.Function;
  * Implementation of the JwtService interface, handling JWT token generation, validation, and refresh token management.
  * Provides functionality to generate access tokens, refresh tokens, and validate tokens.
  */
+@EnableJpaRepositories
 @Service
 public class JwtServiceImpl implements JwtService {
 
@@ -37,15 +39,14 @@ public class JwtServiceImpl implements JwtService {
     @Autowired
     private AstrologyRepository astrologyRepository;
 
-
-
     @Autowired
     private RefreshTokenRepository refreshTokenRepository;
 
     /**
      * Initializes the JwtServiceImpl by generating a secret key for signing JWTs.
      */
-    public JwtServiceImpl() {
+    public JwtServiceImpl(AstrologyRepository astrologyRepository) {
+        this.astrologyRepository = astrologyRepository;
         try {
             KeyGenerator keyGen = KeyGenerator.getInstance("HmacSHA256");
             SecretKey sk = keyGen.generateKey();
@@ -83,10 +84,9 @@ public class JwtServiceImpl implements JwtService {
     public RefreshToken createRefreshToken(String username) {
         Optional<Astrologer> astrologer = astrologyRepository.findByUsername(username);
         Optional<RefreshToken> refreshToken = refreshTokenRepository.findByUserId(astrologer.get().getId());
-        if(refreshToken.isPresent()){
+        if (refreshToken.isPresent()) {
             return refreshToken.get();
-        }
-        else{
+        } else {
             RefreshToken refreshToken1 = RefreshToken.builder()
                     .user(astrologyRepository.findByUsername(username).get())
                     .token(UUID.randomUUID().toString())
