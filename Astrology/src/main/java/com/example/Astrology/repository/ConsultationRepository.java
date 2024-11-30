@@ -14,7 +14,7 @@ import java.util.List;
 public interface ConsultationRepository extends JpaRepository<Consultation, Long> {
     List<Consultation> findByClientId(Long clientId);
 
-    Page<Consultation> findByConsultationDateAsc(Date date, Pageable pageable);
+    Page<Consultation> findByConsultationDateAfterOrderByConsultationDateAsc(Date date, Pageable pageable);
 
     List<Consultation> findByConsultationDateBetween(LocalDate startDate, LocalDate endDate);
 }

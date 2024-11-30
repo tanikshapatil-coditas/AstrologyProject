@@ -25,4 +25,6 @@ public interface AuthService {
      * @return A new JWT token as a String, generated based on the provided refresh token.
      */
     String refresh(String refreshToken);
+
+    public void logout(String accessToken);
 }

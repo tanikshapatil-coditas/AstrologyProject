@@ -1,6 +1,5 @@
 package com.example.Astrology.repository;
 
-import com.example.Astrology.dto.ClientDto;
 import com.example.Astrology.entity.Client;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

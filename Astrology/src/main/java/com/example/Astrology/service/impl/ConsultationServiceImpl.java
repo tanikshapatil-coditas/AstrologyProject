@@ -32,7 +32,6 @@ public class ConsultationServiceImpl implements ConsultationService {
 
     @Override
     public ConsultationCreateDto createConsultation(Long clientId, ConsultationDto consultationDto) {
-
         Client client = clientRepository.findById(clientId).orElseThrow(InvalidUserIdException::new);
         Consultation consultation = ConsultationMapper.toEntity(consultationDto);
         consultation.setClient(client);
@@ -69,6 +68,6 @@ public class ConsultationServiceImpl implements ConsultationService {
     public Page<ConsultationDto> getUpcomingConsultations(Pageable pageable) {
         LocalDate today = LocalDate.now();
         Date startDate = Date.from(today.atStartOfDay(ZoneId.systemDefault()).toInstant());
-        return consultationRepository.findByConsultationDateAsc(startDate, pageable).map(ConsultationMapper::toConsultationDto);
+        return consultationRepository.findByConsultationDateAfterOrderByConsultationDateAsc(startDate, pageable).map(ConsultationMapper::toConsultationDto);
     }
 }

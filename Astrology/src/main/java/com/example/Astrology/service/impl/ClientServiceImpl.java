@@ -95,6 +95,14 @@ public class ClientServiceImpl implements ClientService {
         if ("name".equalsIgnoreCase(sortBy)) {
             Pageable sortedByName = PageRequest.of(pageable.getPageNumber(), pageable.getPageSize(), Sort.by("name"));
             return clientRepository.findAll(sortedByName).map(ClientMapper::toDto);
+        }
+        if ("age_desc".equalsIgnoreCase(sortBy)) {
+            Pageable sortByAgeDesc = PageRequest.of(pageable.getPageNumber(), pageable.getPageSize(), Sort.by("age").descending());
+            return clientRepository.findAll(sortByAgeDesc).map(ClientMapper::toDto);
+        }
+        if ("age_asc".equalsIgnoreCase(sortBy)) {
+            Pageable sortByAgeAsc = PageRequest.of(pageable.getPageNumber(), pageable.getPageSize(), Sort.by("age").ascending());
+            return clientRepository.findAll(sortByAgeAsc).map(ClientMapper::toDto);
         } else {
             return clientRepository.findAll(pageable).map(ClientMapper::toDto);
         }
@@ -114,4 +122,3 @@ public class ClientServiceImpl implements ClientService {
         return consultations.stream().filter(consultation -> consultation.getBalance() > 0).map(consultation -> new PendingAmountDto(consultation.getClient().getId(), consultation.getClient().getName(), consultation.getBalance())).collect(Collectors.toList());
     }
 }
-

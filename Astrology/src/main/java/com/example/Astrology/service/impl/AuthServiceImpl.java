@@ -4,6 +4,7 @@ import com.example.Astrology.dto.AuthRequest;
 import com.example.Astrology.dto.AuthResponse;
 import com.example.Astrology.entity.Astrologer;
 import com.example.Astrology.entity.RefreshToken;
+import com.example.Astrology.exception.InvalidUserIdException;
 import com.example.Astrology.exception.RefreshTokenNotFoundException;
 import com.example.Astrology.repository.RefreshTokenRepository;
 import com.example.Astrology.repository.AstrologyRepository;
@@ -14,6 +15,8 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
 
 /**
  * Service implementation that handles authentication-related operations such as user login,
@@ -74,5 +77,12 @@ public class AuthServiceImpl implements AuthService {
                     return jwtService.generateToken(astrologer.getUsername());
                 })
                 .orElseThrow(RefreshTokenNotFoundException::new);
+    }
+
+    @Override
+    public void logout(String accessToken) {
+        Astrologer astrologer = astrologyRepository.findByUsername(jwtService.extractUsername(accessToken)).orElseThrow(RefreshTokenNotFoundException::new);;
+
+
     }
 }
