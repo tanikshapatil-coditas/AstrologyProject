@@ -2,7 +2,7 @@ package com.example.Astrology.controller;
 
 import com.example.Astrology.dto.AuthRequest;
 import com.example.Astrology.dto.AuthResponse;
-import com.example.Astrology.dto.ResponseUtil;
+import com.example.Astrology.util.ResponseUtil;
 import com.example.Astrology.service.AuthService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;

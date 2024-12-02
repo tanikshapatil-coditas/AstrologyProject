@@ -2,10 +2,7 @@ package com.example.Astrology.service.impl;
 
 import com.example.Astrology.dto.ClientDto;
 import com.example.Astrology.dto.ClientNameDto;
-import com.example.Astrology.dto.EarningsDto;
-import com.example.Astrology.dto.PendingAmountDto;
 import com.example.Astrology.entity.Client;
-import com.example.Astrology.entity.Consultation;
 import com.example.Astrology.exception.InvalidUserIdException;
 import com.example.Astrology.mapper.ClientMapper;
 import com.example.Astrology.repository.ClientRepository;
@@ -23,21 +20,17 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
-import java.time.LocalDate;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 @NoArgsConstructor
 @AllArgsConstructor
-@Data
 public class ClientServiceImpl implements ClientService {
 
     @Autowired
     private ClientRepository clientRepository;
 
-    @Autowired
-    private ConsultationRepository consultationRepository;
+
 
     @Override
     public ClientDto createClient(ClientDto clientDto, MultipartFile uploadMedia) throws IOException {
@@ -108,17 +101,5 @@ public class ClientServiceImpl implements ClientService {
         }
     }
 
-    @Override
-    public EarningsDto getTotalAndPendingEarnings(LocalDate startDate, LocalDate endDate) {
-        List<Consultation> consultations = consultationRepository.findByConsultationDateBetween(startDate, endDate);
-        double totalEarnings = consultations.stream().mapToDouble(Consultation::getFee).sum();
-        double totalPending = consultations.stream().mapToDouble(Consultation::getBalance).sum();
-        return new EarningsDto(totalEarnings, totalPending);
-    }
 
-    @Override
-    public List<PendingAmountDto> getClientsWithPendingAmounts(LocalDate startDate, LocalDate endDate) {
-        List<Consultation> consultations = consultationRepository.findByConsultationDateBetween(startDate, endDate);
-        return consultations.stream().filter(consultation -> consultation.getBalance() > 0).map(consultation -> new PendingAmountDto(consultation.getClient().getId(), consultation.getClient().getName(), consultation.getBalance())).collect(Collectors.toList());
-    }
 }

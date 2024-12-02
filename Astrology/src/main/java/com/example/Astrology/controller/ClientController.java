@@ -3,14 +3,9 @@ package com.example.Astrology.controller;
 import com.example.Astrology.dto.ApiResponse;
 import com.example.Astrology.dto.ClientDto;
 import com.example.Astrology.dto.ClientNameDto;
-import com.example.Astrology.dto.ResponseUtil;
-import com.example.Astrology.repository.ClientRepository;
-import com.example.Astrology.repository.ConsultationRepository;
-import com.example.Astrology.service.ClientService;
+import com.example.Astrology.util.ResponseUtil;
 import com.example.Astrology.service.impl.ClientServiceImpl;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -24,11 +19,14 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/client")
-@AllArgsConstructor
 public class ClientController {
 
-    @Autowired
+
     private ClientServiceImpl clientService;
+
+    public ClientController(ClientServiceImpl clientService) {
+        this.clientService = clientService;
+    }
 
 
     @PostMapping("/create")

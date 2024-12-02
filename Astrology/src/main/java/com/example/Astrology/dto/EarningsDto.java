@@ -6,14 +6,10 @@ import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
 public class EarningsDto {
-    private double totalEarnings;
-    private double totalPending;
-
-    public EarningsDto(double totalEarnings, double totalPending) {
-        this.totalEarnings = totalEarnings;
-        this.totalPending = totalPending;
-    }
-
+    private Double monthlyEarning;
+    private Double amountPaid;
+    private Double balance;
 
 }

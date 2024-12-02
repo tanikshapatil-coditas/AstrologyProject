@@ -1,5 +1,6 @@
-package com.example.Astrology.dto;
+package com.example.Astrology.util;
 
+import com.example.Astrology.dto.ApiResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 

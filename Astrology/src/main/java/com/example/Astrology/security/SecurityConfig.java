@@ -49,6 +49,7 @@ public class SecurityConfig {
                     req.requestMatchers("/api/users/**").permitAll();
                     req.requestMatchers("/api/products/**").permitAll();
                     req.requestMatchers("/api/auth/**").permitAll();
+                    req.requestMatchers("/api/dashboard/**").permitAll();
                     req.anyRequest().authenticated();
                 })
                 .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
