@@ -11,6 +11,7 @@ import java.util.Date;
 @NoArgsConstructor
 public class ConsultationDto {
     private Long id;
+    private String name;
     private Date consultationDate;
     private Double fee;
     private Double amountPaid;

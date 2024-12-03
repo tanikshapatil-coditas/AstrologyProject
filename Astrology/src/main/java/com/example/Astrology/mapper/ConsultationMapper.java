@@ -28,7 +28,8 @@ public class ConsultationMapper {
         consultationDto.setBalance(consultation.getBalance());
         consultationDto.setNotes(consultation.getNotes());
         consultationDto.setNextConsultationDate(consultation.getNextConsultationDate());
-        consultationDto.setClientId(consultationDto.getClientId());
+        consultationDto.setClientId(consultation.getClient().getId());
+        consultationDto.setName(consultation.getClient().getName());
         return consultationDto;
     }
 

@@ -2,8 +2,10 @@ package com.example.Astrology.service.impl;
 
 import com.example.Astrology.dto.ConsultationDto;
 import com.example.Astrology.dto.EarningsDto;
+import com.example.Astrology.entity.Client;
 import com.example.Astrology.entity.Consultation;
 import com.example.Astrology.mapper.ConsultationMapper;
+import com.example.Astrology.repository.ClientRepository;
 import com.example.Astrology.repository.ConsultationRepository;
 import com.example.Astrology.service.DashboardService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,8 +24,12 @@ public class DashboardServiceImpl implements DashboardService {
     @Autowired
     private ConsultationRepository consultationRepository;
 
-    public DashboardServiceImpl(ConsultationRepository consultationRepository) {
+    @Autowired
+    private ClientRepository clientRepository;
+
+    public DashboardServiceImpl(ConsultationRepository consultationRepository, ClientRepository clientRepository) {
         this.consultationRepository = consultationRepository;
+        this.clientRepository = clientRepository;
     }
 
     @Override
