@@ -73,6 +73,12 @@ public class ClientController {
         List<Client> clients = clientService.searchByName(name);
         return ResponseUtil.success(clients, "Search results retrieved successfully!!");
     }
+
+    @GetMapping("/getClient/{id}")
+    public ResponseEntity<ApiResponse<Client>> getById(@PathVariable Long id) {
+        Client client = clientService.getClientById(id);
+        return ResponseUtil.success(client, "Client name retrieved successfully");
+    }
 }
 
 

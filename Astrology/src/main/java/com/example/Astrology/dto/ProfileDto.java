@@ -14,6 +14,7 @@ public class ProfileDto {
     private String phoneNumber;
     private String bio;
     private int yearsOfExperience;
+    private Long totalNoOfClients;
 
     public ProfileDto() {
 

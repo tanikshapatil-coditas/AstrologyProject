@@ -4,6 +4,7 @@ import com.example.Astrology.dto.ProfileDto;
 import com.example.Astrology.entity.Astrologer;
 import com.example.Astrology.exception.UsernameRequiredException;
 import com.example.Astrology.repository.AstrologyRepository;
+import com.example.Astrology.repository.ClientRepository;
 import com.example.Astrology.service.ProfileService;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -22,6 +23,9 @@ public class ProfileServiceImpl implements ProfileService {
     @Autowired
     private AstrologyRepository astrologyRepository;
 
+    @Autowired
+    private ClientRepository clientRepository;
+
     public ProfileServiceImpl(Astrologer astrologer, AstrologyRepository astrologyRepository) {
         this.astrologer = astrologer;
         this.astrologyRepository = astrologyRepository;
@@ -37,6 +41,8 @@ public class ProfileServiceImpl implements ProfileService {
         profileDto.setPhoneNumber(astrologer.getPhoneNumber());
         profileDto.setBio(astrologer.getBio());
         profileDto.setYearsOfExperience(astrologer.getYearsOfExperience());
+        Long totalClientList = clientRepository.findAll().stream().count();
+        profileDto.setTotalNoOfClients(totalClientList);
         return profileDto;
     }
 }

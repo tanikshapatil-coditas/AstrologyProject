@@ -15,6 +15,9 @@ public interface ConsultationService {
 
     void deleteConsultation(Long id);
 
+    Client getClient(Long id);
+
+
 
 
 }

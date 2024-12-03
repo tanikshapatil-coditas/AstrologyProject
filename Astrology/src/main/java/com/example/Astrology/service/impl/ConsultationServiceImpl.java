@@ -37,7 +37,9 @@ public class ConsultationServiceImpl implements ConsultationService {
     @Override
     public List<ConsultationDto> getClientConsultations(Long clientId) {
         Client client = clientRepository.findById(clientId).orElseThrow(InvalidUserIdException::new);
+        client.getName();
         List<Consultation> consultations = consultationRepository.findByClientId(clientId);
+
         return consultations.stream().map(ConsultationMapper::toConsultationDto).collect(Collectors.toList());
     }
 
@@ -66,5 +68,11 @@ public class ConsultationServiceImpl implements ConsultationService {
     public void deleteConsultation(Long id) {
         Consultation consultation = consultationRepository.findById(id).orElseThrow(ConsultationNotFoundException::new);
         consultationRepository.delete(consultation);
+    }
+
+    @Override
+    public Client getClient(Long id) {
+        Client client = clientRepository.findById(id).stream().filter(t->id.equals(t.getId())).findFirst().orElseThrow(InvalidUserIdException::new);
+        return client;
     }
 }
