@@ -3,8 +3,9 @@ package com.example.Astrology.controller;
 import com.example.Astrology.dto.ApiResponse;
 import com.example.Astrology.dto.ClientDto;
 import com.example.Astrology.dto.ClientNameDto;
-import com.example.Astrology.util.ResponseUtil;
+import com.example.Astrology.entity.Client;
 import com.example.Astrology.service.impl.ClientServiceImpl;
+import com.example.Astrology.util.ResponseUtil;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -65,6 +66,12 @@ public class ClientController {
         Pageable pageable = PageRequest.of(page, size);
         Page<ClientDto> clients = clientService.getClients(sortBy, pageable);
         return ResponseUtil.success(clients, "Clients retrieved successfully!!");
+    }
+
+    @GetMapping("/search")
+    public ResponseEntity<ApiResponse<List<Client>>> searchByName(@RequestParam String name) {
+        List<Client> clients = clientService.searchByName(name);
+        return ResponseUtil.success(clients, "Search results retrieved successfully!!");
     }
 }
 

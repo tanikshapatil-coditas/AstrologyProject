@@ -2,8 +2,8 @@ package com.example.Astrology.mapper;
 
 import com.example.Astrology.dto.ConsultationCreateDto;
 import com.example.Astrology.dto.ConsultationDto;
+import com.example.Astrology.dto.GetAllConsultationsDto;
 import com.example.Astrology.entity.Consultation;
-import com.example.Astrology.entity.Client;
 
 public class ConsultationMapper {
 
@@ -28,6 +28,7 @@ public class ConsultationMapper {
         consultationDto.setBalance(consultation.getBalance());
         consultationDto.setNotes(consultation.getNotes());
         consultationDto.setNextConsultationDate(consultation.getNextConsultationDate());
+        consultationDto.setClientId(consultationDto.getClientId());
         return consultationDto;
     }
 
@@ -44,5 +45,15 @@ public class ConsultationMapper {
 
     }
 
-
+    public static GetAllConsultationsDto getAllConsultationsDto(Consultation consultation){
+        GetAllConsultationsDto getAllConsultationsDto = new GetAllConsultationsDto();
+        getAllConsultationsDto.setId(consultation.getId());
+        getAllConsultationsDto.setConsultationDate(consultation.getConsultationDate());
+        getAllConsultationsDto.setFee(consultation.getFee());
+        getAllConsultationsDto.setAmountPaid(consultation.getAmountPaid());
+        getAllConsultationsDto.setBalance(consultation.getBalance());
+        getAllConsultationsDto.setNotes(consultation.getNotes());
+        getAllConsultationsDto.setNextConsultationDate(consultation.getNextConsultationDate());
+        return getAllConsultationsDto;
+    }
 }

@@ -42,21 +42,21 @@ public class SecurityConfig {
     SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http.csrf(c -> c.disable())
                 .authorizeHttpRequests(req -> {
-//                            req.anyRequest().permitAll();
-//                        })
-//                        .build();
-//    }
-                    req.requestMatchers("/api/users/**").permitAll();
-                    req.requestMatchers("/api/products/**").permitAll();
-                    req.requestMatchers("/api/auth/**").permitAll();
-                    req.requestMatchers("/api/dashboard/**").permitAll();
-                    req.anyRequest().authenticated();
-                })
-                .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
-                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                .build();
-
+                            req.anyRequest().permitAll();
+                        })
+                        .build();
     }
+//                    req.requestMatchers("/api/users/**").permitAll();
+//                    req.requestMatchers("/api/products/**").permitAll();
+//                    req.requestMatchers("/api/auth/**").permitAll();
+//                    req.requestMatchers("/api/dashboard/**").permitAll();
+//                    req.anyRequest().authenticated();
+//                })
+//                .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
+//                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+//                .build();
+//
+//    }
     /**
      * Defines an authentication provider using DaoAuthenticationProvider with a custom user details service
      * and password encoder for authentication.

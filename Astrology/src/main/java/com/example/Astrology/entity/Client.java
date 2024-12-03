@@ -51,6 +51,5 @@ public class Client {
     private List<Consultation> consultations;
 
     public Client() {
-
     }
 }

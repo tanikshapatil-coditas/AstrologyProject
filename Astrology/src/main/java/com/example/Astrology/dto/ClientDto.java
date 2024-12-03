@@ -25,6 +25,5 @@ public class ClientDto {
     private Integer age;
     private String contact;
     private byte[] uploadMedia;
-//    private List<ConsultationDto> consultations;
 }
 

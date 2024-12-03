@@ -11,13 +11,8 @@ import com.example.Astrology.repository.ClientRepository;
 import com.example.Astrology.repository.ConsultationRepository;
 import com.example.Astrology.service.ConsultationService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
-import java.time.ZoneId;
-import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -46,6 +41,14 @@ public class ConsultationServiceImpl implements ConsultationService {
         return consultations.stream().map(ConsultationMapper::toConsultationDto).collect(Collectors.toList());
     }
 
+//    @Override
+//    public List<GetAllConsultationsDto> getClientConsultations(Long clientId){
+//        Client client = clientRepository.findById(clientId).orElseThrow(InvalidUserIdException::new);
+//       // Client client1 = clientRepository.findById(clientId).stream().findFirst().orElseThrow(InvalidUserIdException::new);
+//        List<Consultation> consultations = consultationRepository.findByClientId(clientId);
+//        return consultations.stream().map(ConsultationMapper::getAllConsultationsDto).collect(Collectors.toList());
+//    }
+
     @Override
     public ConsultationCreateDto updateConsultation(Long id, ConsultationDto consultationDto) {
         Consultation consultation = consultationRepository.findById(id).orElseThrow(ConsultationNotFoundException::new);
@@ -64,6 +67,4 @@ public class ConsultationServiceImpl implements ConsultationService {
         Consultation consultation = consultationRepository.findById(id).orElseThrow(ConsultationNotFoundException::new);
         consultationRepository.delete(consultation);
     }
-
-
 }

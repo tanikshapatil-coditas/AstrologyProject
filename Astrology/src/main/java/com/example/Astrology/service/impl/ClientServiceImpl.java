@@ -6,10 +6,8 @@ import com.example.Astrology.entity.Client;
 import com.example.Astrology.exception.InvalidUserIdException;
 import com.example.Astrology.mapper.ClientMapper;
 import com.example.Astrology.repository.ClientRepository;
-import com.example.Astrology.repository.ConsultationRepository;
 import com.example.Astrology.service.ClientService;
 import lombok.AllArgsConstructor;
-import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -29,7 +27,6 @@ public class ClientServiceImpl implements ClientService {
 
     @Autowired
     private ClientRepository clientRepository;
-
 
 
     @Override
@@ -101,5 +98,8 @@ public class ClientServiceImpl implements ClientService {
         }
     }
 
-
+    @Override
+    public List<Client> searchByName(String name) {
+        return clientRepository.findByNameContaining(name);
+    }
 }

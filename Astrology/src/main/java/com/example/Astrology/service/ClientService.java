@@ -23,4 +23,6 @@ public interface ClientService {
 
     Page<ClientDto> getClients(String sortBy, Pageable pageable);
 
+    List<Client> searchByName(String name);
+
 }

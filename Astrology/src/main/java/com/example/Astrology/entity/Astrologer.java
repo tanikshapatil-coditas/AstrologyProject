@@ -24,4 +24,18 @@ public class Astrologer {
     @NotBlank(message = "Password is required")
     private String password;
 
+    @Column(name = "full_name")
+    private String fullname;
+
+    @Column(name = "emailId")
+    private String emailId;
+
+    @Column(name = "phoneNumber")
+    private String phoneNumber;
+
+    @Column(name = "bio",columnDefinition = "LONGTEXT")
+    private String bio;
+
+    @Column(name = "years_of_experience")
+    private int yearsOfExperience;
 }
