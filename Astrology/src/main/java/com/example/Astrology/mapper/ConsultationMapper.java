@@ -2,6 +2,7 @@ package com.example.Astrology.mapper;
 
 import com.example.Astrology.dto.ConsultationCreateDto;
 import com.example.Astrology.dto.ConsultationDto;
+import com.example.Astrology.dto.ConsultationWithClientDto;
 import com.example.Astrology.dto.GetAllConsultationsDto;
 import com.example.Astrology.entity.Consultation;
 
@@ -56,5 +57,23 @@ public class ConsultationMapper {
         getAllConsultationsDto.setNotes(consultation.getNotes());
         getAllConsultationsDto.setNextConsultationDate(consultation.getNextConsultationDate());
         return getAllConsultationsDto;
+    }
+
+    public static ConsultationWithClientDto consultationWithClientDto(Consultation consultation) {
+        ConsultationWithClientDto consultationWithClientDto = new ConsultationWithClientDto();
+        consultationWithClientDto.setId(consultation.getId());
+        consultationWithClientDto.setName(consultation.getClient().getName());
+        consultationWithClientDto.setDob(consultation.getClient().getDob());
+        consultationWithClientDto.setAddress(consultation.getClient().getAddress());
+        consultationWithClientDto.setAge(consultation.getClient().getAge());
+        consultationWithClientDto.setContact(consultation.getClient().getContact());
+        consultationWithClientDto.setConsultationDate(consultation.getConsultationDate());
+        consultationWithClientDto.setFee(consultation.getFee());
+        consultationWithClientDto.setAmountPaid(consultation.getAmountPaid());
+        consultationWithClientDto.setBalance(consultation.getBalance());
+        consultationWithClientDto.setNotes(consultation.getNotes());
+        consultationWithClientDto.setNextConsultationDate(consultation.getNextConsultationDate());
+        consultationWithClientDto.setClientId(consultation.getClient().getId());
+        return consultationWithClientDto;
     }
 }

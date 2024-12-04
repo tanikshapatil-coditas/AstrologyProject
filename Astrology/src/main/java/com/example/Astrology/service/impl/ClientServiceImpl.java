@@ -1,5 +1,6 @@
 package com.example.Astrology.service.impl;
 
+import com.example.Astrology.dto.ClientDetailsDtoWithoutMedia;
 import com.example.Astrology.dto.ClientDto;
 import com.example.Astrology.dto.ClientNameDto;
 import com.example.Astrology.entity.Client;
@@ -45,7 +46,7 @@ public class ClientServiceImpl implements ClientService {
 
     @Override
     public List<ClientNameDto> getAllClient(int pageNumber) {
-        PageRequest pageRequest = PageRequest.of(pageNumber, 5);
+        PageRequest pageRequest = PageRequest.of(pageNumber, 15);
         Page<ClientNameDto> clientPage = clientRepository.findAllClientNames(pageRequest);
         return clientPage.getContent();
     }
@@ -80,26 +81,41 @@ public class ClientServiceImpl implements ClientService {
         clientRepository.deleteById(id);
     }
 
-    @Override
-    public Page<ClientDto> getClients(String sortBy, Pageable pageable) {
-        if ("name".equalsIgnoreCase(sortBy)) {
-            Pageable sortedByName = PageRequest.of(pageable.getPageNumber(), pageable.getPageSize(), Sort.by("name"));
-            return clientRepository.findAll(sortedByName).map(ClientMapper::toDto);
-        }
-        if ("age_desc".equalsIgnoreCase(sortBy)) {
-            Pageable sortByAgeDesc = PageRequest.of(pageable.getPageNumber(), pageable.getPageSize(), Sort.by("age").descending());
-            return clientRepository.findAll(sortByAgeDesc).map(ClientMapper::toDto);
-        }
-        if ("age_asc".equalsIgnoreCase(sortBy)) {
-            Pageable sortByAgeAsc = PageRequest.of(pageable.getPageNumber(), pageable.getPageSize(), Sort.by("age").ascending());
-            return clientRepository.findAll(sortByAgeAsc).map(ClientMapper::toDto);
-        } else {
-            return clientRepository.findAll(pageable).map(ClientMapper::toDto);
-        }
-    }
+//    @Override
+//    public Page<ClientDto> getClients(String sortBy, Pageable pageable) {
+//        if ("name".equalsIgnoreCase(sortBy)) {
+//            Pageable sortedByName = PageRequest.of(pageable.getPageNumber(), pageable.getPageSize(), Sort.by("name"));
+//            return clientRepository.findAll(sortedByName).map(ClientMapper::toDto);
+//        }
+//        if ("age_desc".equalsIgnoreCase(sortBy)) {
+//            Pageable sortByAgeDesc = PageRequest.of(pageable.getPageNumber(), pageable.getPageSize(), Sort.by("age").descending());
+//            return clientRepository.findAll(sortByAgeDesc).map(ClientMapper::toDto);
+//        }
+//        if ("age_asc".equalsIgnoreCase(sortBy)) {
+//            Pageable sortByAgeAsc = PageRequest.of(pageable.getPageNumber(), pageable.getPageSize(), Sort.by("age").ascending());
+//            return clientRepository.findAll(sortByAgeAsc).map(ClientMapper::toDto);
+//        } else {
+//            return clientRepository.findAll(pageable).map(ClientMapper::toDto);
+//        }
+//    }
 
-    @Override
-    public List<Client> searchByName(String name) {
-        return clientRepository.findByNameContaining(name);
+    public Page<ClientDetailsDtoWithoutMedia> searchByName(String name, String sortBy, Pageable pageable) {
+        Sort sort = Sort.unsorted();
+        if ("name".equalsIgnoreCase(sortBy)) {
+            sort = Sort.by("name").ascending();
+        } else if ("age_desc".equalsIgnoreCase(sortBy)) {
+            sort = Sort.by("age").descending();
+        } else if ("age_asc".equalsIgnoreCase(sortBy)) {
+            sort = Sort.by("age").ascending();
+        }
+        Pageable sortedPageable = PageRequest.of(pageable.getPageNumber(), pageable.getPageSize(), sort);
+        Page<Client> clientPage = clientRepository.findByNameContaining(name, sortedPageable);
+        return clientPage.map(ClientMapper::toClientDetailsWithoutMedia);
     }
 }
+
+//    @Override
+//    public Page<Client> filterByage(int startAge, int endAge, Pageable pageable) {
+//        return null;
+//    }
+//}

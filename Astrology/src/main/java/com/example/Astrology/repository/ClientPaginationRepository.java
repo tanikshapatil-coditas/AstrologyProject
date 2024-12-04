@@ -13,8 +13,8 @@ public interface ClientPaginationRepository extends PagingAndSortingRepository<C
     @Query("SELECT c FROM Client c ORDER BY c.name ASC")
     Page<Client> findAllSortedByName(Pageable pageable);
 
-    @Query("SELECT c FROM Client c WHERE c.name = :name")
-    Page<Client> findByName(String name, Pageable pageable);
-
     Iterable<Client> findAll(Sort sort);
+
+//    @Query("SELECT c from Client  WHERE c.age BETWEEN :startAge AND :endAge")
+//    Page<Client> filterByage(int startAge,int endAge,Pageable pageable);
 }

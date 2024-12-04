@@ -2,8 +2,8 @@ package com.example.Astrology.controller;
 
 import com.example.Astrology.dto.AuthRequest;
 import com.example.Astrology.dto.AuthResponse;
-import com.example.Astrology.util.ResponseUtil;
 import com.example.Astrology.service.AuthService;
+import com.example.Astrology.util.ResponseUtil;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -30,4 +30,9 @@ public class AuthController {
         return ResponseUtil.success(accessToken, "Access token generated successfully!!");
     }
 
+//    @PostMapping("/logout")
+//    public ResponseEntity<Void> logout(@RequestHeader("Authorization") String token) {
+//        authService.logout(token);
+//        return ResponseEntity.noContent().build();
+//    }
 }

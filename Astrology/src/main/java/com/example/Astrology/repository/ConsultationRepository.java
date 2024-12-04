@@ -14,6 +14,7 @@ public interface ConsultationRepository extends JpaRepository<Consultation, Long
 
     List<Consultation> findByClientId(Long clientId);
 
+    @Query(value = "SELECT * FROM consultations ORDER BY next_consultation_date ASC;",nativeQuery = true)
     Page<Consultation> findByConsultationDateAfterOrderByConsultationDateAsc(Date date, Pageable pageable);
 
     @Query(value = "SELECT * FROM consultations WHERE EXTRACT(MONTH FROM consultation_date) = :month AND EXTRACT(YEAR FROM consultation_date) = :year", nativeQuery = true)

@@ -79,8 +79,12 @@ public class AuthServiceImpl implements AuthService {
                 .orElseThrow(RefreshTokenNotFoundException::new);
     }
 
-    @Override
-    public void logout(String accessToken) {
-        Astrologer astrologer = astrologyRepository.findByUsername(jwtService.extractUsername(accessToken)).orElseThrow(RefreshTokenNotFoundException::new);;
-    }
+//    @Override
+//    public void logout(String accessToken) {
+//        String username = jwtService.extractUsername(accessToken);
+//        Astrologer astrologer = astrologyRepository.findByUsername(username)
+//                .orElseThrow(RefreshTokenNotFoundException::new);
+//        refreshrepo.deleteByAstrologerId(astrologer.getId());
+//    }
+
 }

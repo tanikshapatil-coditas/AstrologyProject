@@ -3,6 +3,7 @@ package com.example.Astrology.controller;
 import com.example.Astrology.dto.ApiResponse;
 import com.example.Astrology.dto.ConsultationCreateDto;
 import com.example.Astrology.dto.ConsultationDto;
+import com.example.Astrology.dto.ConsultationWithClientDto;
 import com.example.Astrology.util.ResponseUtil;
 import com.example.Astrology.service.ConsultationService;
 import lombok.AllArgsConstructor;
@@ -27,8 +28,8 @@ public class ConsultationController {
     }
 
     @GetMapping("/getAll/{clientId}")
-    public ResponseEntity<ApiResponse<List<ConsultationDto>>> getClientConsultations(@PathVariable Long clientId) {
-        List<ConsultationDto> consultations = consultationService.getClientConsultations(clientId);
+    public ResponseEntity<ApiResponse<List<ConsultationWithClientDto>>> getClientConsultations(@PathVariable Long clientId) {
+        List<ConsultationWithClientDto> consultations = consultationService.getClientConsultations(clientId);
         return ResponseUtil.success(consultations, "Consultations retrieved successfully!!");
     }
 
@@ -43,6 +44,4 @@ public class ConsultationController {
         consultationService.deleteConsultation(id);
         return ResponseUtil.delete(null, "Consultation deleted successfully!!");
     }
-
-
 }

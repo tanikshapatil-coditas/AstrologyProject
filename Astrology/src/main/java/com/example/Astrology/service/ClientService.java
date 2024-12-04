@@ -1,5 +1,6 @@
 package com.example.Astrology.service;
 
+import com.example.Astrology.dto.ClientDetailsDtoWithoutMedia;
 import com.example.Astrology.dto.ClientDto;
 import com.example.Astrology.dto.ClientNameDto;
 import com.example.Astrology.entity.Client;
@@ -21,8 +22,6 @@ public interface ClientService {
 
     void deleteClient(Long id);
 
-    Page<ClientDto> getClients(String sortBy, Pageable pageable);
-
-    List<Client> searchByName(String name);
+    Page<ClientDetailsDtoWithoutMedia> searchByName(String name, String sortBy, Pageable pageable);
 
 }

@@ -1,6 +1,7 @@
 package com.example.Astrology.controller;
 
 import com.example.Astrology.dto.ApiResponse;
+import com.example.Astrology.dto.ClientDetailsDtoWithoutMedia;
 import com.example.Astrology.dto.ClientDto;
 import com.example.Astrology.dto.ClientNameDto;
 import com.example.Astrology.entity.Client;
@@ -61,16 +62,17 @@ public class ClientController {
         return ResponseUtil.delete(null, "Client deleted successfully!!");
     }
 
-    @GetMapping("/sortedClients")
-    public ResponseEntity<ApiResponse<Page<ClientDto>>> getClients(@RequestParam int page, @RequestParam int size, @RequestParam(required = false) String sortBy) {
-        Pageable pageable = PageRequest.of(page, size);
-        Page<ClientDto> clients = clientService.getClients(sortBy, pageable);
-        return ResponseUtil.success(clients, "Clients retrieved successfully!!");
-    }
+//    @GetMapping("/sortedClients")
+//    public ResponseEntity<ApiResponse<Page<ClientDto>>> getClients(@RequestParam int page, @RequestParam int size, @RequestParam(required = false) String sortBy) {
+//        Pageable pageable = PageRequest.of(page, size);
+//        Page<ClientDto> clients = clientService.getClients(sortBy, pageable);
+//        return ResponseUtil.success(clients, "Clients retrieved successfully!!");
+//    }
 
     @GetMapping("/search")
-    public ResponseEntity<ApiResponse<List<Client>>> searchByName(@RequestParam String name) {
-        List<Client> clients = clientService.searchByName(name);
+    public ResponseEntity<ApiResponse<Page<ClientDetailsDtoWithoutMedia>>> searchByName(@RequestParam String name, @RequestParam(required = false) String sortBy, @RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "10") int size) {
+        Pageable pageable = PageRequest.of(page, size);
+        Page<ClientDetailsDtoWithoutMedia> clients = clientService.searchByName(name, sortBy, pageable);
         return ResponseUtil.success(clients, "Search results retrieved successfully!!");
     }
 

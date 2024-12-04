@@ -2,6 +2,7 @@ package com.example.Astrology.service.impl;
 
 import com.example.Astrology.dto.ConsultationCreateDto;
 import com.example.Astrology.dto.ConsultationDto;
+import com.example.Astrology.dto.ConsultationWithClientDto;
 import com.example.Astrology.entity.Client;
 import com.example.Astrology.entity.Consultation;
 import com.example.Astrology.exception.ConsultationNotFoundException;
@@ -35,21 +36,11 @@ public class ConsultationServiceImpl implements ConsultationService {
     }
 
     @Override
-    public List<ConsultationDto> getClientConsultations(Long clientId) {
+    public List<ConsultationWithClientDto> getClientConsultations(Long clientId) {
         Client client = clientRepository.findById(clientId).orElseThrow(InvalidUserIdException::new);
-        client.getName();
         List<Consultation> consultations = consultationRepository.findByClientId(clientId);
-
-        return consultations.stream().map(ConsultationMapper::toConsultationDto).collect(Collectors.toList());
+        return consultations.stream().map(ConsultationMapper::consultationWithClientDto).collect(Collectors.toList());
     }
-
-//    @Override
-//    public List<GetAllConsultationsDto> getClientConsultations(Long clientId){
-//        Client client = clientRepository.findById(clientId).orElseThrow(InvalidUserIdException::new);
-//       // Client client1 = clientRepository.findById(clientId).stream().findFirst().orElseThrow(InvalidUserIdException::new);
-//        List<Consultation> consultations = consultationRepository.findByClientId(clientId);
-//        return consultations.stream().map(ConsultationMapper::getAllConsultationsDto).collect(Collectors.toList());
-//    }
 
     @Override
     public ConsultationCreateDto updateConsultation(Long id, ConsultationDto consultationDto) {

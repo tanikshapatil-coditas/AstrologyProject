@@ -2,7 +2,6 @@ package com.example.Astrology.service.impl;
 
 import com.example.Astrology.dto.ConsultationDto;
 import com.example.Astrology.dto.EarningsDto;
-import com.example.Astrology.entity.Client;
 import com.example.Astrology.entity.Consultation;
 import com.example.Astrology.mapper.ConsultationMapper;
 import com.example.Astrology.repository.ClientRepository;
